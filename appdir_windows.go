@@ -5,6 +5,10 @@ import (
 	"path/filepath"
 )
 
+func SetHomeDir(dir string) {
+	// do nothing
+}
+
 func general(app string) string {
 	return filepath.Join(os.Getenv("APPDATA"), app)
 }

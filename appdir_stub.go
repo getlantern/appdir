@@ -7,6 +7,10 @@ import (
 	"path/filepath"
 )
 
+func SetHomeDir(dir string) {
+	// do nothing
+}
+
 func general(app string) string {
 	return InHomeDir(fmt.Sprintf(".%s", app))
 }
