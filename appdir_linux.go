@@ -4,7 +4,6 @@ package appdir
 import (
 	"fmt"
 	"path/filepath"
-	"runtime"
 	"strings"
 	"sync"
 )
