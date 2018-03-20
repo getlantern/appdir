@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"os/user"
 	"path/filepath"
+
+	"github.com/mitchellh/go-homedir"
 )
 
 // General returns the path for general aplication resources (e.g.
@@ -21,8 +23,14 @@ func Logs(app string) string {
 
 func InHomeDir(filename string) string {
 	usr, err := user.Current()
-	if err != nil {
-		panic(fmt.Errorf("Unable to determine user's home directory: %s", err))
+	if err == nil {
+		return filepath.Join(usr.HomeDir, filename)
 	}
-	return filepath.Join(usr.HomeDir, filename)
+	// "user: Current not implemented on ..." will happen on Linux or Darwin
+	// when cross-compiled from other platforms.
+	homeDir, err2 := homedir.Dir()
+	if err2 != nil {
+		panic(fmt.Errorf("Unable to determine user's home directory: %s, %s", err, err2))
+	}
+	return filepath.Join(homeDir, filename)
 }
