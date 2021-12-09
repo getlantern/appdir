@@ -1,4 +1,5 @@
 // +build !windows,!darwin
+
 package appdir
 
 import (
