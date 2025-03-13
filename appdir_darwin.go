@@ -9,7 +9,7 @@ func SetHomeDir(dir string) {
 }
 
 func general(app string) string {
-	return InHomeDir(filepath.Join("Library/Application Support", app))
+	return generalAll(app)
 }
 
 func logs(app string) string {
