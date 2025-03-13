@@ -4,6 +4,7 @@
 package appdir
 
 import (
+	"fmt"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -32,7 +33,7 @@ func general(app string) string {
 		// It is more common on Linux to expect application related directories
 		// in all lowercase. The lantern wrapper also expects a lowercased
 		// directory.
-		return generalAll(strings.ToLower(app))
+		return generalAll(fmt.Sprintf(".%s", strings.ToLower(app)))
 	}
 }
 
