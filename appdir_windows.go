@@ -1,7 +1,6 @@
 package appdir
 
 import (
-	"os"
 	"path/filepath"
 )
 
@@ -10,7 +9,7 @@ func SetHomeDir(dir string) {
 }
 
 func general(app string) string {
-	return filepath.Join(os.Getenv("APPDATA"), app)
+	return generalAll(app)
 }
 
 func logs(app string) string {
