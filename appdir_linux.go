@@ -7,27 +7,20 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
-	"sync"
+	"sync/atomic"
 )
 
 var (
-	homeDir  string
-	dirMutex sync.RWMutex
+	homeDir atomic.Value
 )
 
 func SetHomeDir(dir string) {
-	dirMutex.Lock()
-	homeDir = dir
-	dirMutex.Unlock()
+	homeDir.Store(dir)
 }
 
 func general(app string) string {
 	if runtime.GOOS == "android" {
-		dirMutex.RLock()
-		dir := homeDir
-		dirMutex.RUnlock()
-
-		return dir
+		return homeDir.Load().(string)
 	} else {
 		// It is more common on Linux to expect application related directories
 		// in all lowercase. The lantern wrapper also expects a lowercased
