@@ -20,8 +20,9 @@ func SetHomeDir(dir string) {
 
 func general(app string) string {
 	if runtime.GOOS == "android" {
-		if homeDir.Load() != nil {
-			return homeDir.Load().(string)
+		dir := homeDir.Load()
+		if dir != nil {
+			return dir.(string)
 		} else {
 			return InHomeDir(app)
 		}
