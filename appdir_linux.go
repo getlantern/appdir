@@ -20,7 +20,12 @@ func SetHomeDir(dir string) {
 
 func general(app string) string {
 	if runtime.GOOS == "android" {
-		return homeDir.Load().(string)
+		if homeDir.Load() != nil {
+			return homeDir.Load().(string)
+		} else {
+			return InHomeDir(app)
+		}
+
 	} else {
 		// It is more common on Linux to expect application related directories
 		// in all lowercase. The lantern wrapper also expects a lowercased
