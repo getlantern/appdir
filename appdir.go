@@ -9,7 +9,7 @@ import (
 )
 
 // General returns the path for general aplication resources (e.g.
-// ~/Library/<App>).
+// ~/Library/Application Support/<App>).
 func General(app string) string {
 	return general(app)
 }
