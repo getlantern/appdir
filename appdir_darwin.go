@@ -13,5 +13,5 @@ func general(app string) string {
 }
 
 func logs(app string) string {
-	return InHomeDir(filepath.Join("Library/Logs", app))
+	return inHomeDir(filepath.Join("Library/Logs", app))
 }

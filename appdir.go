@@ -19,13 +19,13 @@ func Logs(app string) string {
 	return logs(app)
 }
 
-func InHomeDir(filename string) string {
+func inHomeDir(subdir string) string {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
 		log.Printf("Unable to determine user's home directory: %s", err)
-		return filename
+		return subdir
 	}
-	return filepath.Join(homeDir, filename)
+	return mkdir(homeDir, subdir)
 }
 
 func generalAll(app string) string {
@@ -34,5 +34,14 @@ func generalAll(app string) string {
 		log.Printf("Unable to determine user's config directory: %s", err)
 		return app
 	}
-	return filepath.Join(dir, app)
+	return mkdir(dir, app)
+}
+
+func mkdir(baseDir, subdir string) string {
+	path := filepath.Join(baseDir, subdir)
+	// Create the directory if it does not exist
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		os.MkdirAll(path, 0755)
+	}
+	return path
 }
